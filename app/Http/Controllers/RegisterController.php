@@ -35,7 +35,7 @@ class RegisterController extends Controller
         $user = User::create([
             'email' => $request->email,
             'password' => $request->password,
-            'level' => $request->level,
+            'level'=> $request->level,
         ]);
 
         $tim = Tim::create([

@@ -23,7 +23,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'email' => 'required|unique:users',
-            'password' => 'required'
+            'password' => 'required',
+           'level' => 'required|string', // Pastikan 'level' tidak kosong
+            'status' => 'required|string' // Pastikan 'status' tidak kosong
         ];
     }
 
