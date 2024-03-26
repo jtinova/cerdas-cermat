@@ -21,7 +21,7 @@
     ```
 2. Masuk ke direktori proyek.
     ```
-    cd siakad
+    cd cerdas-cermat
     ```
 3. Instal dependensi dengan Composer.
     ```
