@@ -9,6 +9,7 @@ use App\Models\Tim;
 use App\Models\Peserta;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -34,7 +35,7 @@ class RegisterController extends Controller
 
         $user = User::create([
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'level'=> $request->level,
         ]);
 
@@ -74,7 +75,7 @@ class RegisterController extends Controller
 
         $user = User::create([
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'level' => $request->level,
         ]);
 
