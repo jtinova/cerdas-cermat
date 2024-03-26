@@ -1,16 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\BankSoalController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PaketSoalController;
-use App\Http\Controllers\KategoriSoalController;
-use App\Http\Controllers\UserController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/', function () {
-    return view('landingPage.main');
+    return view('landingPage');
 });
 
 //---------------------Auth-----------------------------
@@ -22,23 +28,8 @@ Route::prefix('register')->group(function () {
     Route::post('/anggota', [RegisterController::class, 'storeAnggota']);
 })->middleware('guest');
 //Login
-Route::get('/login', [LoginController::class, 'index'])->middleware('guest');
-Route::post('/login', [LoginController::class, 'authenticate']);
+Route::get('/login', [AuthController::class, 'index'])->middleware('guest');
+Route::post('/login', [AuthController::class, 'authenticate']);
 
 //logout
-Route::post('/logout', [LoginController::class, 'logout']);
-
-//------------------------------- dashboard ---------------------------------------
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-//---------------------------------- User ------------------------------------------
-Route::get('/user', [UserController::class, 'index'])->name('user');
-Route::get('/add-user', [UserController::class, 'create'])->name('user.create');
-
-//-------------------------------- Bank Soal ---------------------------------------
-Route::get('/pakets', [PaketSoalController::class, 'index']);
-Route::prefix('pakets')->group(function () {
-    Route::get('/soal/{id}/{currentSoal}', [PaketSoalController::class, 'soal']);
-    Route::post('/soal/{id}/save', [PaketSoalController::class, 'save']);
-});
-
+Route::post('/logout', [AuthController::class, 'logout']);

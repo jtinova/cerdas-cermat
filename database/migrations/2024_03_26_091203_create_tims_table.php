@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('admin', function (Blueprint $table) {
+        Schema::create('tims', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->unsignedBigInteger('id_user')->unique()->nullable();
-            $table->foreign('id_user')->references('id')->on('users')->nullOnDelete();
+            $table->string('institusi');
+            $table->string('token')->default(0);
+            $table->integer('jumlah_anggota')->default(0);
+            $table->double('nilai')->default(0);
             $table->timestamps();
         });
     }
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admins');
+        Schema::dropIfExists('tims');
     }
 };

@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('paket_soals', function (Blueprint $table) {
+        Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_paket');
+            $table->string('nama');
+            $table->unsignedBigInteger('id_user')->unique()->nullable();
+            $table->foreign('id_user')->references('id')->on('users')->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('paket_soals');
+        Schema::dropIfExists('admins');
     }
 };
