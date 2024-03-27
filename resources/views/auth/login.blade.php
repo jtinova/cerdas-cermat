@@ -7,7 +7,7 @@
                 <div class="card border-0 shadow rounded-3 my-5">
                     <div class="card-body p-1 px-sm-5 py-sm-4 text-center">
                         <img class="logo mx-auto mb-4" src="{{ asset('assets/img/logo/Logo.png') }}" alt="Your Company">
-                        <h5 class="card-title text-center mb-5 fw-light fs-5">Login</h5>
+                        <h5 class="card-title text-center mb-5 pb-0 fs-4">Login</h5>
                         @if (session('loginError'))
                             <div class="alert alert-danger">
                                 {{ session('loginError') }}
@@ -16,11 +16,13 @@
                         <form action="/login" method="POST">
                             @csrf
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="name@example.com">
                                 <label for="email">Alamat Email</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password">
                                 <label for="password">Password</label>
                                 <button type="button" class="btn btn-show-password" onclick="togglePasswordVisibility()">
                                     <i class="bi bi-eye-slash"></i>
@@ -30,7 +32,7 @@
                                 <button class="btn btn-primary btn-auth fw-bold fs-6" type="submit">
                                     Masuk
                                 </button>
-                            </div>    
+                            </div>
                         </form>
                         <p class="mt-4">Tidak memiliki Akun? <a href="/register/ketua">Daftar disini</a> </p>
                     </div>

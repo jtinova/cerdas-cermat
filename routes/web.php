@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaketSoalController;
 
 Route::get('/', function () {
     return view('landingPage');
@@ -26,3 +27,10 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 //----------------------------- Dashboard --------------------------------
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+//-------------------------------- Bank Soal ---------------------------------------
+Route::get('/pakets', [PaketSoalController::class, 'index']);
+Route::prefix('pakets')->group(function () {
+    Route::get('/soal/{id}/{currentSoal}', [PaketSoalController::class, 'soal']);
+    Route::post('/soal/{id}/save', [PaketSoalController::class, 'save']);
+});

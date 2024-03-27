@@ -11,7 +11,7 @@
                         <div class="row text-center mb-5">
                             <div class="col">
                                 <a href="/register/ketua">
-                                  <button class="btn w-100 mb-2 mb-md-0">Ketua</button>
+                                    <button class="btn w-100 mb-2 mb-md-0">Ketua</button>
                                 </a>
                             </div>
                             <div class="col">
@@ -32,17 +32,18 @@
                                 <label for="email">Alamat Email</label>
                             </div>
                             <div class="form-floating mb-3 position-relative">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password">
                                 <label for="password">Password</label>
                                 <button type="button" class="btn btn-show-password" onclick="togglePasswordVisibility()">
                                     <i class="bi bi-eye-slash"></i>
                                 </button>
                             </div>
                             <div class="form-floating mb-3">
-                              <input type="text" name="token" id="token" class="form-control"
-                                  placeholder="Token">
-                              <label for="token">Token</label>
-                          </div>
+                                <input type="text" name="token" id="token" class="form-control"
+                                    placeholder="Token">
+                                <label for="token">Token</label>
+                            </div>
                             <div hidden>
                                 <input type="level" name="level" id="level" value="peserta">
                             </div>
