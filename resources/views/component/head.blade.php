@@ -7,7 +7,7 @@
     <meta content="" name="keywords">
   
     <!-- Favicons -->
-    <link href="assets/img/logo/favicon.png" rel="icon">
+    <link href={{ asset('assets/img/logo/favicon.png') }} rel="icon">
   
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
