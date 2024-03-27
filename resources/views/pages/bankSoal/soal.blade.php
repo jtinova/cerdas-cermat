@@ -126,7 +126,7 @@
                                     <div class="col-4 mb-0">
                                         <div
                                             class="card {{ optional($soalItem)->nomor_soal == $currentSoal ? 'bg-primary text-white' : 'bg-primary-subtle text-primary-emphasis' }} w-75">
-                                            <div class="card-body text-center pt-2 pb-2"
+                                            <div class="card-body text-center pt-2 pb-2 px-1"
                                                 style="display: inline-block; width: 100%; font-size: 10px"
                                                 onclick="changeSoal({{ $paketSoal->id }}, {{ optional($soalItem)->nomor_soal ?? $kotak }})">
                                                 {{ $kotak }}
