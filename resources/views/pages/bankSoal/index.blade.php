@@ -12,6 +12,7 @@
     </div><!-- End Page Title -->
 
     <section class="section">
+        <a href="/pakets/create" class="btn btn-primary mb-3">Buat Paket</a>
         <div class="row align-items-top">
             <div class="col-lg-8">
 
@@ -23,9 +24,13 @@
                             <p>
                                 Terdiri dari {{ $item->daftarSoals->count() }} soal
                             </p>
-                            <p class="card-text d-flex flex-row-reverse">
-                                <a href="/pakets/soal/{{ $item->id }}/1" class="btn btn-primary">Detail</a>
-                            </p>
+                            <form method="POST" action="/pakets/{{ $item->id }}" class="card-text d-flex justify-content-end">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger m-1">Hapus</button>
+                                <a href="/pakets/{{ $item->id }}" class="btn btn-primary m-1">Edit</a>
+                                <a href="/pakets/soal/{{ $item->id }}/1" class="btn btn-primary m-1">Detail</a>
+                            </form>
                         </div>
                     </div>
                 @endforeach

@@ -15,6 +15,34 @@ class PaketSoalController extends Controller
         return view('pages.bankSoal.index', compact('dataPakets'));
     }
 
+    public function create()
+    {
+        return view('pages.bankSoal.createPaket');
+    }
+
+    public function store(Request $request)
+    {
+        PaketSoal::create([
+            'jenis_paket' => $request->paket
+        ]);
+        return redirect('/pakets');
+    }
+
+    public function edit($id)
+    {
+        $paketSoal = PaketSoal::findOrFail($id);
+        return view('pages.bankSoal.updatePaket', compact('paketSoal'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $paketSoal = PaketSoal::findOrFail($id);
+        $paketSoal->jenis_paket = $request->input('paket');
+        $paketSoal->save();
+        return redirect('/pakets');
+    }
+
+
     public function soal($id, $currentSoal)
     {
         $paketSoal = PaketSoal::with('daftarSoals')->findOrFail($id);
@@ -23,7 +51,7 @@ class PaketSoalController extends Controller
         return view('pages.bankSoal.soal', compact('paketSoal', 'soalItem', 'currentSoal'));
     }
 
-    public function save($id, Request $request)
+    public function saveSoal($id, Request $request)
     {
         $paketSoal = PaketSoal::with('daftarSoals')->findOrFail($id);
 
@@ -99,5 +127,10 @@ class PaketSoalController extends Controller
         }
 
         return redirect('/pakets/soal/' . $id . '/' . $request->currentSoal + 1);
+    }
+
+    public function destroy(PaketSoal $id){
+        $id->delete();
+        return redirect('/pakets');
     }
 }
