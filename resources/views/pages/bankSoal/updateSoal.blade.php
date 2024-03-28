@@ -2,50 +2,51 @@
 
 @section('content')
     <div class="pagetitle">
-        <h1>Paket Soal</h1>
+        <h1>Update Soal</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">Ujian</li>
                 <li class="breadcrumb-item"><a href="/pakets">Paket Soal</a></li>
-                <li class="breadcrumb-item active">Soal</li>
+                <li class="breadcrumb-item"><a href="/pakets/{{ $daftarSoal->id_paket }}">Data Soal</a></li>
+                <li class="breadcrumb-item active">Update Soal</li>
             </ol>
         </nav>
 
         <section class="section">
-            <div class="row">
-                <div class="col-lg-8">
 
+            <div class="row">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Soal Nomor {{ optional($soalItem)->nomor_soal ?? Request::segment(4) }}
+                            <h5 class="card-title">Soal
                             </h5>
 
-                            <form action="/pakets/soal/{{ $paketSoal->id }}/save" method="post"
+                            <form action="/pakets/soal/{{ $daftarSoal->id }}/save" method="post"
                                 enctype="multipart/form-data" class="row g-3">
                                 @csrf
-                                <input type="hidden" name="currentSoal" value="{{ $currentSoal }}">
+                                <input type="hidden" name="idSoal" value="{{ $daftarSoal->id }}">
+                                <input type="hidden" name="idPaket" value="{{ $daftarSoal->id_paket }}">
                                 <div class="col-12">
-                                    <label for="namaSoal" class="form-label">Soal</label>
-                                    <textarea name="namaSoal" class="form-control" id="namaSoal" placeholder="Masukkan Nama Soal">{{ optional($soalItem)->pertanyaan }}</textarea>
+                                    <textarea name="namaSoal" class="form-control" id="namaSoal" placeholder="Masukkan Nama Soal">{{ optional($daftarSoal)->pertanyaan }}</textarea>
                                     <span>Masukkan gambar yang dibutuhkan</span>
                                     <br class="m-3">
                                     <input class="m-3" type="file" name="imageSoal" id="imageSoal" accept="image/*">
                                     <div id="imagePreview">
-                                        @if ($soalItem && $soalItem->gambar_pertanyaan)
-                                            <img src="{{ asset('storage/soal/' . $soalItem->gambar_pertanyaan) }}"
+                                        @if ($daftarSoal && $daftarSoal->gambar_pertanyaan)
+                                            <img src="{{ asset('storage/soal/' . $daftarSoal->gambar_pertanyaan) }}"
                                                 alt="Gambar Pertanyaan" style="max-width: 300px;">
                                         @endif
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <label for="namaSoal" class="form-label">Pilihan Jawaban</label>
-                                    @if ($soalItem && is_array($soalItem->opsi_jawaban) && count($soalItem->opsi_jawaban) > 0)
-                                        @foreach ($soalItem->opsi_jawaban as $key => $opsi)
+                                    @if ($daftarSoal && is_array($daftarSoal->opsi_jawaban) && count($daftarSoal->opsi_jawaban) > 0)
+                                        @foreach ($daftarSoal->opsi_jawaban as $key => $opsi)
                                             <div class="form-check mb-3">
                                                 <input type="radio" class="form-check-input" type="radio"
                                                     id="option{{ $key }}" name="pilihanJawaban"
                                                     value="{{ $key + 1 }}"
-                                                    {{ $soalItem->jawaban == $key + 1 ? 'checked' : '' }} />
+                                                    {{ $daftarSoal->jawaban == $key + 1 ? 'checked' : '' }} />
 
                                                 <span class="ml-2" for="option{{ $key }}">
                                                     @php
@@ -61,10 +62,10 @@
                                                 <br class="m-3">
                                                 <!-- Image preview for answer choice -->
                                                 <div id="jawabanImagePreview{{ $key }}" class="mb-6 mt-3">
-                                                    @if ($soalItem->gambar_opsi_jawaban)
+                                                    @if ($daftarSoal->gambar_opsi_jawaban)
                                                         @php
                                                             $gambarOpsiJawaban = json_decode(
-                                                                $soalItem->gambar_opsi_jawaban,
+                                                                $daftarSoal->gambar_opsi_jawaban,
                                                                 true,
                                                             );
                                                         @endphp
@@ -96,51 +97,24 @@
                                                         class="form-check-label" value="" required>
                                                 </span>
                                                 <!-- Image preview for answer choice -->
-                                                <div id="jawabanImagePreview{{ $key }}" class="mb-6 mt-3"></div>
+                                                <div id="jawabanImagePreview{{ $key }}" class="mb-6 mt-3">
+                                                </div>
 
                                             </div>
                                         @endfor
                                     @endif
                                 </div>
-                                <p class="card-text flex">
-                                    <button type="submit" class="btn btn-primary">Simpan & Lanjutkan</button>
+                                <p class="card-text d-flex justify-content-end">
+                                    <a href="/pakets/{{ $daftarSoal->id_paket }}" class="btn btn-danger m-1">Batal</a>
+                                    <button type="submit" class="btn btn-primary m-1">Simpan</button>
                                 </p>
-
                             </form>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-4">
-                    <div class="card" style="height: fit-content">
-                        <div class="">
-                            <div class="row mx-auto mt-4 justify-content-start px-2">
-                                @php
-                                    $jumlahSoalSaatIni = count($paketSoal->daftarSoals);
-                                @endphp
-                                @foreach (range(1, $jumlahSoalSaatIni) as $kotak)
-                                    @php
-                                        $soalItem = $paketSoal->daftarSoals->where('nomor_soal', $kotak)->first();
-                                    @endphp
-                                    <div class="col-4 mb-0">
-                                        <div
-                                            class="card {{ optional($soalItem)->nomor_soal == $currentSoal ? 'bg-primary text-white' : 'bg-primary-subtle text-primary-emphasis' }} w-75">
-                                            <div class="card-body text-center pt-2 pb-2 px-1"
-                                                style="display: inline-block; width: 100%; font-size: 10px"
-                                                onclick="changeSoal({{ $paketSoal->id }}, {{ optional($soalItem)->nomor_soal ?? $kotak }})">
-                                                {{ $kotak }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    </div><!-- End Page Title -->
+    </div>
 @endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -187,8 +161,4 @@
 
         }
     });
-
-    function changeSoal(id, currentSoal) {
-        window.location.href = "/pakets/soal/" + id + "/" + currentSoal;
-    }
 </script>

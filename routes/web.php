@@ -38,10 +38,14 @@ Route::delete('user/{id}', [UserController::class, 'destroy'])->name('user.destr
 Route::get('/pakets', [PaketSoalController::class, 'index']);
 Route::get('/pakets/create', [PaketSoalController::class, 'create']);
 Route::prefix('pakets')->group(function () {
-    Route::get('/{id}', [PaketSoalController::class, 'edit']);
-    Route::post('/{id}/update', [PaketSoalController::class, 'update']);
+    //--------------------------paket-------------------------
+    Route::get('/edit/{id}', [PaketSoalController::class, 'edit']);
+    Route::post('/update/{id}', [PaketSoalController::class, 'update']);
     Route::post('/create/save', [PaketSoalController::class, 'store']);
-    Route::get('/soal/{id}/', [PaketSoalController::class, 'soal']);
-    Route::post('/soal/{id}/save', [PaketSoalController::class, 'saveSoal']);
     Route::delete('/{id}', [PaketSoalController::class, 'destroy']);
+    //-------------------------soal------------------------------
+    Route::get('/{id}', [PaketSoalController::class, 'soal']);
+    Route::get('/soal/{id}/', [PaketSoalController::class, 'showSoal']);
+    Route::post('/soal/update/{id}', [PaketSoalController::class, 'updateSoal']);
+    Route::delete('/soal/{id}/', [PaketSoalController::class, 'destroySoal']);
 });

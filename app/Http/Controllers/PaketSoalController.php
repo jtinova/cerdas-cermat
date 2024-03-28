@@ -45,11 +45,18 @@ class PaketSoalController extends Controller
 
     public function soal($id)
     {
+        $daftarPaket = PaketSoal::where('id', $id)->first();
         $daftarSoals = DaftarSoal::where('id_paket', $id)->get();
-        return view('pages.bankSoal.GrubSoal', compact('daftarSoals'));
+        return view('pages.bankSoal.showSoal', compact('daftarSoals', 'daftarPaket'));
     }
 
-    public function saveSoal($id, Request $request)
+    public function showSoal($id)
+    {
+        $daftarSoal = DaftarSoal::where('id', $id)->first();
+        return view('pages.bankSoal.updateSoal', compact('daftarSoal'));
+    }
+
+    public function updateSoal($id, Request $request)
     {
         $paketSoal = PaketSoal::with('daftarSoals')->findOrFail($id);
 
@@ -124,11 +131,19 @@ class PaketSoalController extends Controller
             $buatSoal->save();
         }
 
-        return redirect('/pakets/soal/' . $id . '/' . $request->currentSoal + 1);
+        return redirect('/pakets/' . $request->idPaket);
     }
 
-    public function destroy(PaketSoal $id){
+    public function destroy(PaketSoal $id)
+    {
         $id->delete();
-        return redirect('/pakets');
+        return redirect()->back();
+    }
+
+    public function destroySoal(DaftarSoal $id)
+    {
+        $daftarSoal = DaftarSoal::where('id', $id)->first();
+        $id->delete();
+        return redirect()->back();
     }
 }
