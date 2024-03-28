@@ -128,4 +128,9 @@ class PaketSoalController extends Controller
 
         return redirect('/pakets/soal/' . $id . '/' . $request->currentSoal + 1);
     }
+
+    public function destroy(PaketSoal $id){
+        $id->delete();
+        return redirect('/pakets');
+    }
 }

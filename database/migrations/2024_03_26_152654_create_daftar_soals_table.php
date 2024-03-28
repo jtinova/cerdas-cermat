@@ -20,7 +20,7 @@ return new class extends Migration
             $table->json('gambar_opsi_jawaban')->nullable();
             $table->unsignedTinyInteger('jawaban')->nullable();
             $table->unsignedBigInteger('id_paket')->nullable();
-            $table->foreign('id_paket')->references('id')->on('paket_soals');
+            $table->foreign('id_paket')->references('id')->on('paket_soals')->onDelete('cascade');;
             $table->timestamps();
         });
     }
@@ -30,6 +30,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('daftar_soals');
+        //Schema::dropIfExists('daftar_soals');
+        Schema::table('daftar_soals', function (Blueprint $table) {
+            // Menghapus foreign key constraint
+            $table->dropForeign(['id_paket']);
+        });
     }
 };
