@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\Peserta;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -80,30 +81,24 @@ public function store(Request $request)
     return redirect()->action('user');
 }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+public function editPassword($id)
+{
+    $user = User::findOrFail($id);
+    return view('pages.edit-password', compact('user'));
+}
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+public function updatePassword(Request $request, $id)
+{
+    $request->validate([
+        'password' => 'required',
+    ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    $user = User::findOrFail($id);
+    $user->password = Hash::make($request->password);
+    $user->save();
 
+    return redirect()->back()->with('success', 'Password berhasil diperbarui');
+}
     /**
      * Remove the specified resource from storage.
      */

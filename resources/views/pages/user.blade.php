@@ -36,11 +36,18 @@
                                         <td class="px-4 py-4">{{ $user['email'] }}</td>
                                         <td class="px-4 py-4">{{ $user['level'] }}</td>
                                         <td class="px-4 py-4">
-                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST"
+                                                class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="bi bi-trash"></i></button>
                                             </form>
+
+                                            <a href="{{ route('user.editPassword', $user->id) }}"
+                                                class="btn btn-info btn-sm">
+                                                <i class="bi bi-key"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
