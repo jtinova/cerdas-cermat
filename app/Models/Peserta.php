@@ -16,7 +16,7 @@ class Peserta extends Model
         return $this->belongsTo(Tim::class);
     }
 
-    public function user(){
+    public function users(){
         return $this->belongsTo(User::class);
     }
 }
