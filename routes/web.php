@@ -33,6 +33,8 @@ Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::get('/add-user', [UserController::class, 'create'])->name('user.create');
 Route::post('/user', [UserController::class, 'store'])->name('user.store');
 Route::delete('user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('user/{id}/edit-password', [UserController::class, 'editPassword'])->name('user.editPassword');
+Route::put('user/{id}/update-password', [UserController::class, 'updatePassword'])->name('user.updatePassword');
 
 //-------------------------------- Bank Soal ---------------------------------------
 Route::get('/pakets', [PaketSoalController::class, 'index']);
