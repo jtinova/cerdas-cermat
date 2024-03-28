@@ -38,5 +38,14 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
+
+    public function pesertas(){
+        return $this->hasOne(Peserta::class, 'id_user', 'id');
+    }
+    
+    public function admin(){
+        return $this->hasOne(Admin::class, 'id_user', 'id');
+    }
 }

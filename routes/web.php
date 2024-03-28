@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaketSoalController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('landingPage');
@@ -23,10 +24,15 @@ Route::get('/login', [AuthController::class, 'index']);
 Route::post('/login', [AuthController::class, 'authenticate']);
 
 //logout
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //----------------------------- Dashboard --------------------------------
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+//---------------------------------- User ------------------------------------------
+Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/add-user', [UserController::class, 'create'])->name('user.create');
+Route::post('/user', [UserController::class, 'store'])->name('user.store');
+Route::delete('user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 //-------------------------------- Bank Soal ---------------------------------------
 Route::get('/pakets', [PaketSoalController::class, 'index']);
