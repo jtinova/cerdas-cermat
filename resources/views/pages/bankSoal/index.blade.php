@@ -14,13 +14,16 @@
     <section class="section">
         <a href="/pakets/create" class="btn btn-primary mb-3">Buat Paket</a>
         <div class="row align-items-top">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
 
                 {{-- Card --}}
                 @foreach ($dataPakets as $item)
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $item->jenis_paket }}</h5>
+                            <h5 class="card-title">
+                                {{ $item->jenis_paket }} 
+                                <a href="/pakets/edit/{{ $item->id }}" class="btn btn-primary">Edit</a>
+                            </h5>
                             <p>
                                 Terdiri dari {{ $item->daftarSoals->count() }} soal
                             </p>
@@ -29,7 +32,6 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger m-1">Hapus</button>
                                 <a href="/pakets/{{ $item->id }}" class="btn btn-primary m-1">Edit</a>
-                                <a href="/pakets/soal/{{ $item->id }}/1" class="btn btn-primary m-1">Detail</a>
                             </form>
                         </div>
                     </div>

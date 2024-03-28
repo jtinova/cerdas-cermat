@@ -10,7 +10,7 @@
             </ol>
         </nav>
 
-        <div class="col-lg-7">
+        <div class="col-lg-12">
 
             <div class="card">
                 <div class="card-body">

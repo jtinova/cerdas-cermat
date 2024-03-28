@@ -10,12 +10,12 @@
             </ol>
         </nav>
 
-        <div class="col-lg-7">
+        <div class="col-lg-12">
 
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Update Paket</h5>
-                    <form action="{{ $paketSoal->id }}/update" method="POST">
+                    <form action="/update/{{ $paketSoal->id }}" method="POST">
                         @csrf
                         <div class="col-12 mb-3">
                             <label for="paket" class="form-label">Nama Paket</label>

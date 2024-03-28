@@ -21,7 +21,6 @@ class DaftarSoalSeeder extends Seeder
 
             for ($i = 1; $i <= $jumlahSoal; $i++) {
                 DaftarSoal::create([
-                    'nomor_soal' => "$i",
                     'pertanyaan' => "Pertanyaan untuk Paket $paketSoalId dan Soal ke-$i",
                     'opsi_jawaban' => [
                         "Opsi A untuk Soal ke-$i",
