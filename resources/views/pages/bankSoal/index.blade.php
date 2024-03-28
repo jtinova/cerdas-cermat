@@ -29,7 +29,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger m-1">Hapus</button>
                                 <a href="/pakets/{{ $item->id }}" class="btn btn-primary m-1">Edit</a>
-                                <a href="/pakets/soal/{{ $item->id }}/1" class="btn btn-primary m-1">Detail</a>
+                                <a href="/pakets/soal/{{ $item->id }}" class="btn btn-primary m-1">Detail</a>
                             </form>
                         </div>
                     </div>

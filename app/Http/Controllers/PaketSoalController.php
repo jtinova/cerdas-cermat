@@ -43,12 +43,10 @@ class PaketSoalController extends Controller
     }
 
 
-    public function soal($id, $currentSoal)
+    public function soal($id)
     {
-        $paketSoal = PaketSoal::with('daftarSoals')->findOrFail($id);
-        $soalItem = $paketSoal->daftarSoals->where('nomor_soal', $currentSoal)->first();
-
-        return view('pages.bankSoal.soal', compact('paketSoal', 'soalItem', 'currentSoal'));
+        $daftarSoals = DaftarSoal::where('id_paket', $id)->get();
+        return view('pages.bankSoal.GrubSoal', compact('daftarSoals'));
     }
 
     public function saveSoal($id, Request $request)
